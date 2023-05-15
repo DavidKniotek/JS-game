@@ -16,14 +16,9 @@ const staggerFrames = 5;
 
 const animate = () => {
     ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
-    // ctx.fillRect(100, 50, 100, 100);
-    // ctx.drawImage(image, source-x, sy, sw, sh, destination-x, dy, dw, dh);
-    ctx.drawImage(playerImage, frameX * spriteWidth, frameY * spriteHeight, spriteWidth, spriteHeight, 0, 0, spriteWidth, spriteHeight);
-    if (gameFrame % staggerFrames == 0) {
-        if (frameX < 6) frameX++;
-        else frameX = 0;
-    };
-
+    let position = Math.floor(gameFrame/staggerFrames) % 6; // 6 frames per line, counting from 0, check image 'shadow_dog.png'
+    frameX = spriteWidth * position;
+    ctx.drawImage(playerImage, frameX, frameY * spriteHeight, spriteWidth, spriteHeight, 0, 0, spriteWidth, spriteHeight);
     gameFrame++;
     requestAnimationFrame(animate);
 };
